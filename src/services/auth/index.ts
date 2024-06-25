@@ -7,7 +7,7 @@ import { prisma } from '../database'
  
 export const {
      handlers: { GET, POST },
-    = auth, 
+     auth, 
     } = NextAuth({
       pages: {
         signIn: '/auth',
