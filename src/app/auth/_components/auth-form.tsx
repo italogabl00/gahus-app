@@ -13,12 +13,13 @@ export const AuthForm: React.FC = (): JSX.Element => {
   const handleSubmit = form.handleSubmit(async (data) => {
     try {
 
-      //await signIn('email', { email: data.email, redirect: false });
+      await signIn('email', { email: data.email, redirect: false });
       toast({
         title: 'Magic Link Sent',
         description: 'Check your email for the magic link to login'
       })
     } catch (error) {
+      console.log('error', error)
       toast({
         title: 'Error',
         description: 'An error occurred, Please try again'
