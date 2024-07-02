@@ -1,17 +1,14 @@
 import { auth } from "@/services/auth"
-
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { UserInfo } from "./_components/user-info"
 export default  async function Page() {
 
     const session = await auth()
 
     return (
-        <main>
-            <div>
-                <Avatar>
-                    <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-                <span>{session?.user?.email}</span>
-            </div>
+        <main className="flex items-center justify-center h-screen">
+            
+            <UserInfo user={session?.user} />
         </main>
     )
 }
