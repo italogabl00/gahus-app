@@ -20,7 +20,7 @@ export function UserInfo({ user }: Props) {
                 <span>{user.email}</span>
 
             <Button variant='outline' onClick={() => signOut()}>
-            Sign Out        
+            Sign Out    
             </Button>
 
             </div>

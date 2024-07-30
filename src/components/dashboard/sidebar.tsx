@@ -10,7 +10,7 @@ export type SidebarGenericProps<T = unknown> = {
 
 export function Sidebar({ className, children }: SidebarGenericProps) {
     return (
-        <aside className={cn(['', className])}>
+        <aside className={cn(['border-r border-border flex flex-col space-y-6', className])}>
             {children}
         </aside>
     )
@@ -18,7 +18,7 @@ export function Sidebar({ className, children }: SidebarGenericProps) {
 
 export function SidebarHeader({ className, children }: SidebarGenericProps) {
     return( 
-        <header className={cn(['', className])}>
+        <header className={cn(['px-6', className])}>
             {children}
         </header>
 )}
@@ -32,7 +32,7 @@ export function SidebarHeaderTitle({ className, children }: SidebarGenericProps)
 
 export function SidebarMain({ className, children }: SidebarGenericProps) {
     return(
-        <main className={cn(['', className])}>
+        <main className={cn(['pt-6 px-3', className])}>
         {children}
     </main>
     )
@@ -58,16 +58,16 @@ export function SidebarNavHeader({ className, children }: SidebarGenericProps) {
 
 export function SidebarNavHeaderTitle({ className, children }: SidebarGenericProps) {
     return(
-        <h4 className={cn(['', className])}>
+        <div className={cn(['text-xs uppercase text-muted-foreground ml-3', className])}>
         {children}
-        </h4>
+        </div>
     )
 }
 
 
 export function SidebarNavMain({ className, children }: SidebarGenericProps) {
     return(
-        <main className={cn(['', className])}>
+        <main className={cn(['flex flex-col', className])}>
         {children}
         </main>
     )
@@ -76,11 +76,16 @@ export function SidebarNavMain({ className, children }: SidebarGenericProps) {
 
 type SidebarNavLinkProps = {
     href: string
+    active?: boolean
 }
 
-export function SidebarNavLink({ className, children, href }: SidebarGenericProps<SidebarNavLinkProps>) {
+export function SidebarNavLink({ className, children, href, active }: SidebarGenericProps<SidebarNavLinkProps>) {
     return(
-        <Link href={href} className={cn(['', className])}>
+        <Link href={href} className={cn([
+            'text-sm px-3 py-2',
+            active && 'bg-secondary',
+             className
+             ])}>
         {children}
         </Link>
     )
@@ -89,7 +94,7 @@ export function SidebarNavLink({ className, children, href }: SidebarGenericProp
 
 export function SidebarFooter({ className, children }: SidebarGenericProps) {
     return (
-        <footer className={cn(['', className])}>
+        <footer className={cn(['p-6 mt-auto border-t border-border', className])}>
             {children}
         </footer>
     )
