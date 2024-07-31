@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import { Sidebar } from "@/components/dashboard/sidebar";
 
 type Props = {
     user: Session['user']
@@ -13,6 +14,7 @@ type Props = {
 export function UserInfo({ user }: Props) {
     if(!user) return 
     return (
+        <Sidebar>
         <div className="flex flex-col items-center justify-center space-y-4 ">
                 <Avatar>
                     <AvatarFallback>U</AvatarFallback>
@@ -24,5 +26,7 @@ export function UserInfo({ user }: Props) {
             </Button>
 
             </div>
+            </Sidebar>
+
     )
 }
