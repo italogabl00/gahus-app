@@ -82,7 +82,7 @@ type SidebarNavLinkProps = {
 export function SidebarNavLink({ className, children, href, active }: SidebarGenericProps<SidebarNavLinkProps>) {
     return(
         <Link href={href} className={cn([
-            'text-sm px-3 py-2',
+            'flex items-center text-xs px-3 py-2 rounded-md',
             active && 'bg-secondary',
              className
              ])}>
