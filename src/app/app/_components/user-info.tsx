@@ -5,13 +5,21 @@ import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Sidebar } from "@/components/dashboard/sidebar";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 type Props = {
   user: Session["user"];
 };
 
 export function UserInfo({ user }: Props) {
-  if (!user) return;
+  const router = useRouter();
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+  }, [user]);
+
   return (
     <Sidebar>
       <div className="flex flex-col items-center justify-center space-y-4 ">

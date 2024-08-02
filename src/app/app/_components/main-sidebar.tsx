@@ -1,5 +1,4 @@
-
-'use client'
+"use client";
 
 import {
   Sidebar,
@@ -13,15 +12,15 @@ import {
   SidebarNavMain,
 } from "@/components/dashboard/sidebar";
 import { usePathname } from "next/navigation";
-import { HomeIcon, MixerVerticalIcon } from '@radix-ui/react-icons'
+import { HomeIcon, MixerVerticalIcon } from "@radix-ui/react-icons";
 import { UserDropDown } from "./user-dropdown";
 
 export function MainSidebar() {
-    const pathname = usePathname()
+  const pathname = usePathname();
 
-    const isActive = (path: string) => {
-        return pathname == path 
-    }
+  const isActive = (path: string) => {
+    return pathname == path;
+  };
 
   return (
     <Sidebar>
@@ -31,14 +30,17 @@ export function MainSidebar() {
       <SidebarMain className="flex flex-col flex-grow">
         <SidebarNav>
           <SidebarNavMain>
-            <SidebarNavLink href="/app" active={isActive('/app')}>
-            <HomeIcon className="w-3 h-3 mr-3" />
-            Tarefas
+            <SidebarNavLink href="/app" active={isActive("/app")}>
+              <HomeIcon className="w-3 h-3 mr-3" />
+              Tarefas
             </SidebarNavLink>
-            
-            <SidebarNavLink href="/app/settings" active={isActive('/app/settings')}>
-            <MixerVerticalIcon className="w-3 h-3 mr-3" />
-            Configurações
+
+            <SidebarNavLink
+              href="/app/settings"
+              active={isActive("/app/settings")}
+            >
+              <MixerVerticalIcon className="w-3 h-3 mr-3" />
+              Configurações
             </SidebarNavLink>
           </SidebarNavMain>
         </SidebarNav>
