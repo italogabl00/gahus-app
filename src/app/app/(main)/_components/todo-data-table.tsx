@@ -93,8 +93,10 @@ export const columns: ColumnDef<Todo>[] = [
 
         const { finishedAt } = row.original
         const status: 'done' | 'waiting' = finishedAt ? 'done' : 'waiting'
+        const statusVariant: 'outline' | 'default' = finishedAt ? 'outline' : 'default'
 
-      return <Badge>{status}</Badge>
+        
+      return <Badge variant={statusVariant}>{status}</Badge>
     
     },
   },
