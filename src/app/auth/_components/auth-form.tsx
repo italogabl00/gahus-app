@@ -13,7 +13,7 @@ export const AuthForm: React.FC = (): JSX.Element => {
   const handleSubmit = form.handleSubmit(async (data) => {
     try {
 
-      await signIn('email', { email: data.email, redirect: false });
+      await signIn('nodemailer', { email: data.email, redirect: false });
       toast({
         title: 'Magic Link Sent',
         description: 'Check your email for the magic link to login'
@@ -52,7 +52,8 @@ export const AuthForm: React.FC = (): JSX.Element => {
                 {...form.register("email")}
               />
             </div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+            {form.formState.isSubmitting ? 'Sending...' : 'Send Magic Link'}
               Send Magic Link
             </Button>
           </form>
