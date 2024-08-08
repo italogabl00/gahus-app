@@ -13,13 +13,11 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, Badge, ChevronDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
@@ -90,15 +88,19 @@ export const columns: ColumnDef<Todo>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-
-        const { finishedAt } = row.original
-        const status: 'done' | 'waiting' = finishedAt ? 'done' : 'waiting'
-        const statusVariant: 'outline' | 'default' = finishedAt ? 'outline' : 'default'
-
-        
-      return <Badge variant={statusVariant}>{status}</Badge>
-    
-    },
+        const { finishedAt } = row.original;
+        const status = finishedAt ? 'done' : 'waiting';
+      
+        const statusStyles = finishedAt
+          ? 'bg-green-100 text-green-800'
+          : 'bg-yellow-100 text-yellow-800';
+      
+        return (
+          <span className={`px-2 py-1 rounded-full text-sm font-medium ${statusStyles}`}>
+            {status}
+          </span>
+        );
+      },
   },
   {
     accessorKey: "title",
@@ -184,42 +186,6 @@ export function TodoDataTable() {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
