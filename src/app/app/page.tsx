@@ -8,10 +8,10 @@ export default  async function Page() {
     return (
 <DashboardPage>
 <DashboardPageHeader>
-    <DashboardPageHeaderTitle>Tarefas</DashboardPageHeaderTitle>
+    <DashboardPageHeaderTitle>Tasks</DashboardPageHeaderTitle>
 </DashboardPageHeader>
 <DashboardPageMain>
-    <h1>Tarefas</h1>
+    <h1>Tasks</h1>
 </DashboardPageMain>
 </DashboardPage>
     )
