@@ -2,4 +2,4 @@ import { ReturnTypeWithoutPromise } from "@/types/return-type-without-promise";
 import { getUserTodos } from "./actions";
 
 
-export export type Todo = ReturnTypeWithoutPromise<typeof getUserTodos>[0]
+export type Todo = ReturnTypeWithoutPromise<typeof getUserTodos>[0]

@@ -42,7 +42,7 @@ export const columns: ColumnDef<Todo>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-        const { doneAt } = row.original;
+        const doneAt  = row.original;
         const status: 'done' | 'waiting' = doneAt ? 'done' : 'waiting';
         const variant: 'outline' | 'secondary' = doneAt ? 'outline' : 'secondary'
       return <Badge variant={variant}>{status}</Badge>
