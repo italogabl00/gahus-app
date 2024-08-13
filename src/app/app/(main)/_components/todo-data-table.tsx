@@ -24,7 +24,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
 import {
   Table,
   TableBody,
@@ -33,53 +32,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-
-export type Todo = {
-    id: string
-    title: string
-    createdAt: Date
-    updatedAt: Date
-    finishedAt?: Date
-  }
-
-const data: Todo[] = [
-  {
-    id: "1",
-    title: 'Complete React project',
-    createdAt: new Date('2023-04-01'),
-    updatedAt: new Date('2023-04-02'),
-    finishedAt: new Date('2023-04-03')
-  },
-  {
-    id: "2",
-    title: 'Write blog post about React Hooks',
-    createdAt: new Date('2023-04-04'),
-    updatedAt: new Date('2023-04-05'),
-    finishedAt: new Date('2023-04-06')
-  },
-  {
-    id: "3",
-    title: 'Updated portfolio website',
-    createdAt: new Date('2023-04-07'),
-    updatedAt: new Date('2023-04-09'),
-    finishedAt: new Date('2023-04-09')
-  },
-  {
-    id: "4",
-    title: 'Complete React project',
-    createdAt: new Date('2023-04-10'),
-    updatedAt: new Date('2023-04-11'),
-    finishedAt: new Date('2023-04-12')
-  },
-  {
-    id: "5",
-    title: 'Complete React project',
-    createdAt: new Date('2023-04-13'),
-    updatedAt: new Date('2023-04-14'),
-    finishedAt: new Date('2023-04-15')
-  },
-]
-
+import { Todo } from "../type"
+import { Badge } from "@/components/ui/badge"
 
 
 export const columns: ColumnDef<Todo>[] = [
@@ -88,18 +42,11 @@ export const columns: ColumnDef<Todo>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-        const { finishedAt } = row.original;
-        const status = finishedAt ? 'done' : 'waiting';
-      
-        const statusStyles = finishedAt
-          ? 'bg-green-100 text-green-800'
-          : 'bg-yellow-100 text-yellow-800';
-      
-        return (
-          <span className={`px-2 py-1 rounded-full text-sm font-medium ${statusStyles}`}>
-            {status}
-          </span>
-        );
+        const { doneAt } = row.original;
+        const status: 'done' | 'waiting' = doneAt ? 'done' : 'waiting';
+        const variant: 'outline' | 'secondary' = doneAt ? 'outline' : 'secondary'
+      return <Badge variant={variant}>{status}</Badge>
+
       },
   },
   {
@@ -156,7 +103,11 @@ export const columns: ColumnDef<Todo>[] = [
   },
 ]
 
-export function TodoDataTable() {
+type TodoDataTable = {
+  data: Todo[]
+}
+
+export function TodoDataTable({ data }: TodoDataTable) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
