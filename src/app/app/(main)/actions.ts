@@ -1,3 +1,5 @@
+'use server'
+
 import { auth } from "@/services/auth"
 import { prisma } from "@/services/database"
 import { upsertTodoSchema } from "./schema"
@@ -27,8 +29,26 @@ export async function upsertTodo(input: z.infer<typeof upsertTodoSchema>) {
         }
     }
 
+    
+
     if(input.id) {
-        const todo = await prisma.todo.update({
+        const todo = await prisma.todo.findUnique({
+            where: {
+                userId: session?.user?.id,
+            },
+            select: {
+                id: true,
+            }
+        })
+
+        if(!todo) {
+            return {
+                error: 'Not Found',
+                data: null,
+            }
+        }
+
+        const updatedTodo = await prisma.todo.update({
             where: {
                 id: input.id,
                 userId: session?.user?.id,
@@ -41,7 +61,7 @@ export async function upsertTodo(input: z.infer<typeof upsertTodoSchema>) {
         })
         return {
             error: null,
-            data: todo
+            data: updatedTodo,
         }
     }
 

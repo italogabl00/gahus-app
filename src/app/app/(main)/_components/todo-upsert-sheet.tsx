@@ -11,9 +11,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { useRef } from "react"
-import { Todo } from "./todo-data-table"
+import { Todo } from "../type"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { useForm } from "react-hook-form"
+import { upsertTodo } from "../actions"
 
 type TodoUpsertSheetProps = {
     children?: React.ReactNode
@@ -24,9 +25,13 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
 
     const ref = useRef<HTMLDivElement>(null)
 
-  const form = useForm()
+  const form = useForm({
+    resolver: 
+  })
 
   const onSubmit = form.handleSubmit((data) => {
+    await upsertTodo(data)
+
     console.log(data)
   })
 
