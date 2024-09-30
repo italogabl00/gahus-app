@@ -39,11 +39,10 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
     resolver: zodResolver(upsertTodoSchema),
   });
 
-  const onSubmit = form.handleSubmit(async (data:FormData) => {
+  const onSubmit = form.handleSubmit(async (data) => {
     await upsertTodo(data);
     router.push(router.asPath);
   });
-  
 
   return (
     <Sheet>
@@ -57,7 +56,7 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
             <SheetHeader>
               <SheetTitle>Create todo</SheetTitle>
               <SheetDescription>
-                Make changes to your profile here. Click save when you're done.
+                Make changes to your profile here. Click save when you re done.
               </SheetDescription>
             </SheetHeader>
 
