@@ -39,10 +39,11 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
     resolver: zodResolver(upsertTodoSchema),
   });
 
-  const onSubmit = form.handleSubmit(async (data) => {
+  const onSubmit = form.handleSubmit(async (data:FormData) => {
     await upsertTodo(data);
-    router.refresh();
+    router.push(router.asPath);
   });
+  
 
   return (
     <Sheet>

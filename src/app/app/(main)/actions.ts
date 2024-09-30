@@ -17,7 +17,7 @@ export async function getUserTodos() {
   return todos;
 }
 
-export async function upsertTodo(input: z.infer<typeof upsertTodoSchema>) {
+export async function upsertTodo(data: FormData, FormData: { new(form?: HTMLFormElement, submitter?: HTMLElement | null): FormData; prototype: FormData; }, input: z.infer<typeof upsertTodoSchema>) {
   const session = await auth();
 
   if (!session?.user?.id) {
@@ -28,9 +28,9 @@ export async function upsertTodo(input: z.infer<typeof upsertTodoSchema>) {
   }
 
   if (input.id) {
-    const todo = await prisma.todo.findUnique({
+    const todo = await prisma.todo.findFirst({
       where: {
-        userId: session?.user?.id,
+        userId: session.user.id,
       },
       select: {
         id: true,
